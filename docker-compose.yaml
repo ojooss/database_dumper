@@ -1,0 +1,29 @@
+version: "3"
+
+services:
+
+  dump:
+    image: database-dumper:latest
+    build:
+      context: .
+    environment:
+      DATABASE_HOST: ${DATABASE_HOST}
+      DATABASE_PORT: ${DATABASE_PORT}
+      DATABASE_NAME: ${DATABASE_NAME}
+      DATABASE_USER: ${DATABASE_USER}
+      DATABASE_PWD: ${DATABASE_PWD}
+    volumes:
+      - "./dumps:/dumps"
+
+
+  database:
+    image: mariadb:latest
+    ports:
+      - ${DATABASE_PORT}:3306
+    environment:
+      MYSQL_ROOT_PASSWORD: ${DATABASE_PWD}
+      MYSQL_USER: ${DATABASE_USER}
+      MYSQL_PASSWORD: ${DATABASE_PWD}
+      MYSQL_DATABASE: ${DATABASE_NAME}
+    volumes:
+      - "./dumps/example.sql:/docker-entrypoint-initdb.d/dump.sql"
