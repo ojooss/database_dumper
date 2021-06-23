@@ -24,7 +24,7 @@ while getopts h:-: OPT; do
     h | help )   COMMAND="" ;;
     cmd )        COMMAND="$OPTARG" ;;
     host )       DATABASE_HOST="$OPTARG" ;;
-    port )       DATABASE_HOST="$OPTARG" ;;
+    port )       DATABASE_PORT="$OPTARG" ;;
     user )       DATABASE_USER="$OPTARG" ;;
     pwd )        DATABASE_PWD="$OPTARG" ;;
     db )         DATABASE_NAME="$OPTARG" ;;
